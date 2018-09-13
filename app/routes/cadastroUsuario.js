@@ -17,4 +17,9 @@ module.exports = (app) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         app.app.controller.Usuario.usuarioController.pegarDadosUsuario(app, req, res);
     })
+
+    app.patch('/blog/atualizar/usuario/:id', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        app.app.controller.Usuario.usuarioController.atualizarDadosUsuario(app, req, res);
+    })
 } 

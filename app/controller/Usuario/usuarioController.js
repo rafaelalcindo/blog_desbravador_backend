@@ -36,3 +36,15 @@ module.exports.pegarDadosUsuario = (app, req, res) => {
         .then(resposta => res.status(200).json(resposta) )
         .catch( err => res.status(500).json(err) )
 }
+
+module.exports.atualizarDadosUsuario = (app, req, res) => {
+    const id = req.params.id;
+    const corpo = req.body;
+
+    usuarioModel.update({ _id: id }, corpo)
+        .then(() => {
+            usuarioModel.findById(id)
+                .then(resultado => res.status(201).json(resultado) )
+        })
+        .catch(err => res.status(500).json(err) )
+}
