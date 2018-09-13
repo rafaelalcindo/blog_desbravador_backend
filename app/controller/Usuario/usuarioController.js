@@ -18,5 +18,21 @@ module.exports.cadastroDesbravadorMongo = (app, req, res) => {
     usuario.save()
         .then((user) => res.status(200).json(user) )
         .catch( err => res.status(500).json(err) );
-};
+}
 
+module.exports.logarUsuario = (app, req, res) => {
+    let login  = req.body.login;
+    let senha  = req.body.senha;
+
+    usuarioModel.find({ login: login, senha: senha })
+        .then(resposta => res.status(200).json(resposta) )
+        .catch(err => res.status(500).json(err) )
+}
+
+module.exports.pegarDadosUsuario = (app, req, res) => {
+    let id = req.params.id;
+
+    usuarioModel.findById(id)
+        .then(resposta => res.status(200).json(resposta) )
+        .catch( err => res.status(500).json(err) )
+}
