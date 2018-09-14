@@ -25,3 +25,13 @@ module.exports.cadastrarEspecialidade = (app, req, res) => {
         .catch(error => res.status(500).json(error) )
     
 }
+
+module.exports.pegarEspecialidadeIndividual = (app, req, res) => {
+    const id = req.params.id;
+
+    especialidadeModel.findById(id)
+        .then(resultado => {
+            res.status(200).json(resultado)
+        })
+        .catch(error => res.status(500).json(error) )
+}
