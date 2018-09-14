@@ -12,5 +12,10 @@ module.exports = (app) => {
     app.get('/blog/categorias/listarCategoria', (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         app.app.controller.Categoria.categoriaController.listarTodasCategorias(app, req, res);
-    })
+    });
+
+    app.get('/blog/categorias/listarUmaCategoria/:id', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        app.app.controller.Categoria.categoriaController.listarUmaCategoria(app, req, res);
+    });
 };

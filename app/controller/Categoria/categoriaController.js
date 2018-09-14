@@ -34,3 +34,12 @@ module.exports.listarTodasCategorias = (app, req, res) => {
         .catch( error => res.status(500).json(error) )
 
 }
+
+module.exports.listarUmaCategoria = (app, req, res) => {
+    const id  = req.params.id;
+
+    categoriaModel.findById(id)
+        .then(resposta => res.status(200).json(resposta) )
+        .catch( error => res.status(500).json(error) )
+    
+}
