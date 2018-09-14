@@ -8,6 +8,7 @@ const BlogEspecialidadeSchema = new Schema({
     criado_por: String,
     cadastrado_em: { type: Date, default: Date.now },
     requisitos: String,
+    foto_especialidade: String,
     comentarios: [BlogComentario]
 });
 
