@@ -9,7 +9,7 @@ module.exports.cadastroCategoria = (app, req, res) => {
     categoria.cor       = req.body.cor;
 
     categoria.save()
-        .then(resultado => res.status(200).json(resultado) )
+        .then(resultado => res.status(200).json(resultado) )    
         .catch(erro => res.status(500).json(erro) )
 }
 
