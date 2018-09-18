@@ -8,4 +8,9 @@ module.exports = (app) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         app.app.controller.Especialidade.especialidadeController.pegarEspecialidadeIndividual(app, req, res);
     })
+
+    app.patch('/blog/especialidade/atualizarEspecialidade/:id', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        app.app.controller.Especialidade.especialidadeController.atualizarEspecialidade(app, req, res);
+    })
 }

@@ -41,5 +41,5 @@ module.exports.listarUmaCategoria = (app, req, res) => {
     categoriaModel.findById(id)
         .then(resposta => res.status(200).json(resposta) )
         .catch( error => res.status(500).json(error) )
-    
 }
+

@@ -35,3 +35,18 @@ module.exports.pegarEspecialidadeIndividual = (app, req, res) => {
         })
         .catch(error => res.status(500).json(error) )
 }
+
+module.exports.atualizarEspecialidade = (app, req, res) => {
+    const id = req.params.id;
+    let body = req.body;
+
+    especialidadeModel.update({ _id: id}, body)
+        .then( (resultado) => {
+            especialidadeModel.findById(id)
+                .then(result => {
+                    res.status(200).json(result)
+                })
+                .catch(error => res.status(500).json(error) )
+        })
+        .catch(error => res.status(500).json(error) )
+}

@@ -8,7 +8,7 @@ const BlogComentario = new Schema({
     usuario: UsuarioSchema,
     especialidade: BlogEspecialidadeSchema,
     texto: String,
-    data: Date
+    data: { type: Date, default: Date.now }
 });
 
 module.exports = BlogComentario;
