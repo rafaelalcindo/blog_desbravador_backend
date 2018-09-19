@@ -27,7 +27,7 @@ module.exports.inserirComentario = (app, req, res) => {
                 clube: result.clube,
                 unidade: result.unidade,
                 foto_perfil: result.foto_perfil
-            }
+            };
 
             especialidadeModel.findById(id_especialidade)
                 .then(resultEspeci => {
@@ -35,31 +35,55 @@ module.exports.inserirComentario = (app, req, res) => {
                     let especialidade = {
                         _id: resultEspeci._id,
                         titulo: resultEspeci.titulo,
-                    }
+                    };
 
                     comentario.usuario = usuario;
-                    comentario.especialidade = especialidade
+                    comentario.especialidade = especialidade;
 
                     comentario.save()
                         .then(resultado => {
                             
                             let comentario = {
+                                _id: resultado._id,
                                 texto: resultado.texto,
                                 usuario: resultado.usuario
-                            }
+                            };
 
                             especialidadeModel.update({_id: id_especialidade},{$set: { comentarios: [comentario] }})
                                 .then(result => {
                                     especialidadeModel.findById(id_especialidade)
                                         .then(resultatdoEspeciUp => res.status(200).json(resultatdoEspeciUp) )
-                                        .catch(error => res.status(500).json(error) )
-                                }).catch(error => res.status(500).json(error) )
+                                        .catch(error => res.status(500).json(error) );
+                                }).catch(error => res.status(500).json(error) );
                             
-                        }).catch(error => res.status(500).json(error) )
+                        }).catch(error => res.status(500).json(error) );
                 })
-                .catch(error => res.status(500).json(error) )
+                .catch(error => res.status(500).json(error) );
 
         })
-        .catch(error => res.status(500).json(error) )
+        .catch(error => res.status(500).json(error) );
 
-}
+}; 
+
+// ======================================= Fim de Cadastrar Comentario ===============================
+
+module.exports.excluirComentario = (app, req, res) => {
+    let id_comentario =  req.params.id_comentario;
+    let id_especialidade = req.body.id_especialidade;
+
+    especialidadeModel.update({_id: id_especialidade}, {$pull: { 'comentarios': {'_id': id_comentario } } } )
+        .then(resutado => {
+            if(resutado){
+                especialidadeModel.findById(id_especialidade)
+                    .then(resultado => {
+                        res.status(200).json(resultado);
+                    }).catch(error => res.status(500).json(error) )
+            }
+        })
+        .catch(error => res.status(500).json(error) );
+    /*comentarioModel.remove({ _id: id_comentario })
+        .exec()
+        .then(result => {
+            especialidadeModel.update({_id: id_especialidade}, {$pull: { 'comentarios': {'_id': id_comentario } } } );
+        }).catch(error => res.status(500).json(error) ); */
+};
