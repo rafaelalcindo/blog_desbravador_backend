@@ -22,4 +22,9 @@ module.exports = (app) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
         app.app.controller.Usuario.usuarioController.atualizarDadosUsuario(app, req, res);
     })
+
+    app.patch('/blog/atualizar/usuario/foto_perfil/:id', (req, res) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        app.app.controller.Usuario.usuarioController.atualizarFotoPerfil(app, req, res);
+    })
 } 

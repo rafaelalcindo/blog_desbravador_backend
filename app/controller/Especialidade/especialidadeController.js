@@ -66,6 +66,26 @@ module.exports.atualizarEspecialidade = (app, req, res) => {
         .catch(error => res.status(500).json(error) )
 }
 
+module.exports.atualizarFotoEspecialidade = (app, req, res) => {
+    const id_especialidade = req.params.id_especialidade;
+
+    verificaExtencaoDoArquivo(req.files.foto_especialidade)
+        .then(()=>{ }).catch(() => res.status(500).json({'error':'arquivo não permitido' }) )
+    
+    especialidadeModel.findById(id_especialidade)
+        .then(resultado => {
+            let dir = resultado.foto_especialidade;
+            fs.unlink(dir);
+            let resu_foto_upload = UploadingFotoEspecialidade(req.files.foto_especialidade, resultado.titulo);
+            especialidadeModel.update({_id: id_especialidade}, { $set: { foto_especialidade: resu_foto_upload } })
+                .exec().then(resuUp => {
+                    if(resuUp){
+                        especialidadeModel.findById(id_especialidade)
+                          .then(resu => res.status(500).json(resu) ).catch(error => res.status(500).json(error) )
+                    }
+                }).catch(error => res.status(500).json(error) )
+        }).catch(error => res.status(500).json(error) )
+}
 
 
 // ============================= Funções complementares ===========================
