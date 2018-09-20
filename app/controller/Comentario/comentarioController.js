@@ -80,7 +80,7 @@ module.exports.excluirComentario = (app, req, res) => {
                     }).catch(error => res.status(500).json(error) )
             }
         })
-        .catch(error => res.status(500).json(error) );
+        .catch( error => res.status(500).json(error) );
     /*comentarioModel.remove({ _id: id_comentario })
         .exec()
         .then(result => {

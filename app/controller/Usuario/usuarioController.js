@@ -48,3 +48,21 @@ module.exports.atualizarDadosUsuario = (app, req, res) => {
         })
         .catch(err => res.status(500).json(err) )
 }
+
+// ============================== Privilégios Administrativo ===============================
+
+
+module.exports.mudarPrivilegios = (app, req, res) => {
+    const id_usuario = req.params.id;
+    const privilegio = req.body.privilegio;
+
+    usuarioModel.update({ _id: id_usuario }, { $set: { privilegio: privilegio } })
+        .then(resultUpdate => {
+            if(resultUpdate.ok){
+                usuarioModel.findById(id_usuario)
+                    .then(resultado => {
+                        res.status(200).json(resultado);
+                    }).catch(error => { res.status(500).json(error) })
+            }
+        }).catch(error => res.status(500).json(error) )
+}

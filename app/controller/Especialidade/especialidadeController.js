@@ -10,10 +10,11 @@ var especialidade = new especialidadeModel;
 module.exports.cadastrarEspecialidade = (app, req, res) => {
     const id_categoria = req.body.id_categoria;
 
-    especialidade._id        = new mongoose.Types.ObjectId;
-    especialidade.titulo     = req.body.titulo;
-    especialidade.criado_por = req.body.criado_por;
-    especialidade.requisitos = req.body.requisitos;
+    especialidade._id                = new mongoose.Types.ObjectId;
+    especialidade.titulo             = req.body.titulo;
+    especialidade.criado_por         = req.body.criado_por;
+    especialidade.requisitos         = req.body.requisitos;
+    especialidade.foto_especialidade = req.body.foto_especialidade;
 
     especialidade.save()
         .then(resposta => {
