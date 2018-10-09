@@ -39,7 +39,7 @@ module.exports.cadastrarEspecialidade = (app, req, res) => {
         })
         .catch(error => res.status(500).json(error) )
     
-}
+} 
 
 module.exports.pegarEspecialidadeIndividual = (app, req, res) => {
     const id = req.params.id;
@@ -107,13 +107,13 @@ function verificaExtencaoDoArquivo(nomeArquivo) {
 }
 
 function UploadingFotoEspecialidade(file, titulo) {
-    let dir = "app/assets/file_especialidade/"+criptografarArquivo(crypto, titulo);
+    let dir = "app/assets/file_especialidade/"+criptografarArquivo(crypApelido, titulo);
     try {
         fs.mkdir(dir);
         if(file){
             file.mv(dir+"/"+file.name);
             dir = dir+"/"+file.name;
-        }else { throw e }
+        } else { throw e }
         return dir;
     }catch(e) {
         return null
