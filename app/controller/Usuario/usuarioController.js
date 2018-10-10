@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
+
 const UsuarioSchema = require('../../models/usuarioModel');
 const usuarioModel  = mongoose.model('Desbravadores', UsuarioSchema);
 var usuario = new usuarioModel;
@@ -39,7 +41,11 @@ module.exports.logarUsuario = (app, req, res) => {
     let senha  = req.body.senha;
 
     usuarioModel.find({ login: login, senha: senha })
-        .then(resposta => res.status(200).json(resposta) )
+        .then(resposta => {
+            //res.status(200).json(resposta) 
+            let token = jwt.sign({data: resposta},'secret' );
+            res.status(200).json(token);
+        } )
         .catch(err => res.status(500).json(err) )
 }
 
