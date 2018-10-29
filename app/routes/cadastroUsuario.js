@@ -10,6 +10,7 @@ module.exports = (app) => {
 
     app.post('/blog/logar/usuario', (req, res) => {
         res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         app.app.controller.Usuario.usuarioController.logarUsuario(app,req, res);
     })
 
