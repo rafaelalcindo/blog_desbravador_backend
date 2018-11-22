@@ -4,7 +4,7 @@ const categoriaModel = mongoose.model('Categoria',BlogCategoriaSchema);
 var categoria = new categoriaModel;
 
 module.exports.cadastroCategoria = (app, req, res) => {
-    categoria._id       = new mongoose.Types.ObjectId;
+   // categoria._id       = new mongoose.Types.ObjectId;
     categoria.categoria = req.body.categoria;
     categoria.cor       = req.body.cor;
 
