@@ -13,10 +13,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(expressValidator());
 app.use(fileUpload());
-app.use(cors({
+/* app.use(cors({
 	origin: 'http://localhost:3000',
 	credentials: true
 }));
+*/
 
 consign()
     .include('app/routes')
